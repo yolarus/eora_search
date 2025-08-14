@@ -56,6 +56,7 @@ urls = [
 
 
 def search(user_question: str) -> list:
+    """Search in EORA projects."""
     headers = {'User-Agent': ua.random}
     documents = []
     for url in urls:
@@ -67,7 +68,7 @@ def search(user_question: str) -> list:
         divs = soup.find_all('div')
         divs = [div for div in divs if
                 div.get('class') is not None and any([item.endswith('__artboard') for item in div.get('class')])]
-        for div in divs[10:len(divs)-3]:
+        for div in divs[10:len(divs) - 3]:
             result.append(' '.join(div.text.split()))
         name = ' '.join(divs[10].text.split())
         text = '. '.join(result).replace('\xa0', '').replace('/', '').replace('\n', ' ')[:1500]
